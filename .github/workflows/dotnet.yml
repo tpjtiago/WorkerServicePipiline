@@ -1,0 +1,28 @@
+name: .NET
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - staging
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Set Environment Variables
+        run: |
+          echo "MINHA_VARIAVEL_AMBIENTE=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
+          echo "NOME_TITULO=Meu título" >> $GITHUB_ENV
+      - name: Show Environment Variables
+        run: |
+          echo "MINHA_VARIAVEL_AMBIENTE=${MINHA_VARIAVEL_AMBIENTE}"
+          echo "NOME_TITULO=${NOME_TITULO}"
