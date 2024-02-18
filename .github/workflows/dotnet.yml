@@ -18,11 +18,11 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
-      - name: Set Environment Variables
-        run: |
-          echo "FRUTA_DEV=Valor da Fruta no ambiente dev" >> $GITHUB_ENV
-          echo "FRUTA_QA=Valor da Fruta no ambiente qa" >> $GITHUB_ENV
       - name: Show Environment Variables
+        if: |
+          github.event_name == 'pull_request' && (
+            ${{ github.event.pull_request.base.ref == 'develop' && env.ENVIRONMENT == 'dev' }} ||
+            ${{ github.event.pull_request.base.ref == 'staging' && env.ENVIRONMENT == 'qa' }}
+          )
         run: |
-          echo "FRUTA_DEV=${FRUTA_DEV}"
-          echo "FRUTA_QA=${FRUTA_QA}"
+          echo "Valor da variável FRUTA: ${FRUTA}"
