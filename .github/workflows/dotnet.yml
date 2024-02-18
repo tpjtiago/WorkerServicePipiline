@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
-      - name: Show Environment Variables
+      - name: Show Environment Variables TT
         if: |
           github.event_name == 'pull_request' && (
             ${{ github.event.pull_request.base.ref == 'develop' && env.ENVIRONMENT == 'dev' }} ||
