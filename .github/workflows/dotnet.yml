@@ -25,4 +25,4 @@ jobs:
             ${{ github.event.pull_request.base.ref == 'staging' && env.ENVIRONMENT == 'qa' }}
           )
         run: |
-          echo "Valor da variável FRUTA: ${{ FRUTA }}"
+          echo "Valor da variável FRUTA: ${{ vars.FRUTA }}"
