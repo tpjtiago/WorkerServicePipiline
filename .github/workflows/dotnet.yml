@@ -1,0 +1,28 @@
+name: .NET
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+      - staging
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Show Environment Variables
+        if: |
+          github.event_name == 'pull_request' && (
+            ${{ github.event.pull_request.base.ref == 'develop' && env.ENVIRONMENT == 'dev' }} ||
+            ${{ github.event.pull_request.base.ref == 'staging' && env.ENVIRONMENT == 'qa' }}
+          )
+        run: |
+          echo "Valor da variável FRUTA: ${{ vars.FRUTA }}"
