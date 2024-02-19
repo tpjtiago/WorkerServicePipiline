@@ -14,8 +14,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: dev
+    environment: dev
 
     steps:
       - uses: actions/checkout@v3
@@ -26,4 +25,6 @@ jobs:
       - name: Show Environment Variables TT
         run: |
           echo "Valor da variável FRUTA: ${{ env.FRUTA }}"
-          echo "Valor da variável FRUTA: ${{ vars.FRUTA }}"
+          echo "Valor da variável FRUTA: $FRUTA"
+    env:
+        REPOSITORY_VAR: ${{ vars.FRUTA }}
