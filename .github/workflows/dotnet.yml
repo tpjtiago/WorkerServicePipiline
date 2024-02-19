@@ -26,3 +26,5 @@ jobs:
       - name: Show Environment Variables TT
         run: |
           echo "Valor da variável FRUTA: ${{ env.FRUTA }}"
+           echo "Valor da variável FRUTA: ${ vars.FRUTA }"
+            echo "Valor da variável FRUTA: ${{ vars.FRUTA }}"
