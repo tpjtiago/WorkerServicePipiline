@@ -1,6 +1,9 @@
 name: .NET
 
 on:
+  push:
+    branches:
+      - develop
   pull_request:
     branches:
       - master
@@ -21,5 +24,6 @@ jobs:
         with:
           dotnet-version: 6.0.x
       - name: Show Environment Variables TT
+        if: github.event_name == 'pull_request' && (github.event.pull_request.base.ref == 'develop' || github.event.pull_request.base.ref == 'staging')
         run: |
           echo "Valor da variável FRUTA: ${{ env.FRUTA }}"
