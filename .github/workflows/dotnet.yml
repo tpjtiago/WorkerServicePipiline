@@ -12,19 +12,27 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    environment: dev
+    env:
+      MY_APP_ID: ${{ vars.FRUTA }}
 
     steps:
+      - name: Read a variable
+        run: echo "My APP_ID value is ${{ vars.FRUTA }}"
+    
       - uses: actions/checkout@v3
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
-      - name: Show Environment Variables TT
-        run: |
-          echo "Valor da variável FRUTA: ${{ env.FRUTA }}"
-          echo "Valor da variável FRUTA: $FRUTA"
+
+  top-secret-production:
+    runs-on: ubuntu-latest
+    environment: dev
     env:
-        REPOSITORY_VAR: ${{ vars.FRUTA }}
+      APP_ID: ${{ vars.FRUTA }}
+
+    steps:
+      - name: Read a variable
+        run: echo "My APP_ID value in the production job is $FRUTA"      
+
