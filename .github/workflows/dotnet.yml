@@ -11,28 +11,21 @@ on:
       - staging
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    env:
-      MY_APP_ID: ${{ vars.FRUTA }}
-
-    steps:
-      - name: Read a variable
-        run: echo "My APP_ID value is ${{ vars.FRUTA }}"
-    
-      - uses: actions/checkout@v3
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 6.0.x
-
-  top-secret-production:
+  top-vars:
     runs-on: ubuntu-latest
     environment: dev
     env:
-      APP_ID: ${{ vars.FRUTA }}
+      FRUTA: ${{ vars.FRUTA }}
+      AMBIENTE: ${{ vars.MINHA_VARIAVEL_AMBIENTE }}
+      TITULO: ${{ vars.NOME_TITULO }}
 
     steps:
-      - name: Read a variable
-        run: echo "My APP_ID value in the production job is $FRUTA"      
+      - name: Read a variable FRUTA
+        run: echo "Variavel fruta $FRUTA"  
+
+      - name: Read a variable AMBIENTE
+        run: echo "Variavel de amebiente is  $AMBIENTE"  
+
+      - name: Read a variable TITULO
+        run: echo "Variavel de titulo is $TITULO"  
 
